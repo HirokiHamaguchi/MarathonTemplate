@@ -8,20 +8,25 @@
 #include "viewer.hpp"
 #define debug(...) viewer::_debug(__LINE__, #__VA_ARGS__, __VA_ARGS__)
 #endif
-
-using namespace std;
-constexpr int INF = 1001001001;
-constexpr long long INFll = 1001001001001001001;
-template <class T>
-bool chmax(T& a, const T& b) {
-    return a < b ? a = b, 1 : 0;
-}
-template <class T>
-bool chmin(T& a, const T& b) {
-    return a > b ? a = b, 1 : 0;
-}
-
 // clang-format off
+using namespace std;
+template <typename T> using vc = vector<T>;
+template <typename T> using vvc = vector<vc<T>>;
+template <typename T> using vvvc = vector<vvc<T>>;
+using ll = long long; using ld = long double;
+using pii = pair<int, int>; using pll = pair<ll, ll>;
+using tiii = tuple<int, int, int>; using tlll = tuple<ll, ll, ll>;
+using vi = vc<int>; using vvi = vvc<int>; using vvvi = vvvc<int>;
+using vll = vc<ll>; using vvll = vvc<ll>; using vvvll = vvvc<ll>;
+using vb = vc<bool>; using vvb = vvc<bool>; using vvvb = vvvc<bool>;
+using vpii = vc<pii>; using vvpii = vvc<pii>; using vpll = vc<pll>; using vvpll = vvc<pll>;
+using vtiii = vc<tiii>; using vvtiii = vvc<tiii>; using vtlll = vc<tlll>; using vvtlll = vvc<tlll>;
+#define ALL(x) begin(x), end(x)
+#define RALL(x) (x).rbegin(), (x).rend()
+constexpr int INF = 1001001001; constexpr long long INFll = 1001001001001001001;
+template <class T> bool chmax(T& a, const T& b) { return a < b ? a = b, 1 : 0; }
+template <class T> bool chmin(T& a, const T& b) { return a > b ? a = b, 1 : 0; }
+
 struct Timer{
     void start(){_start=chrono::system_clock::now();}
     void stop(){_end=chrono::system_clock::now();sum+=chrono::duration_cast<chrono::nanoseconds>(_end-_start).count();}
@@ -103,15 +108,57 @@ struct _YX {
     friend istream& operator>>(istream& is, _YX<Z>& r) { return is >> r.y >> r.x; }
     friend ostream& operator<<(ostream& os, _YX<Z> const& r) { return os << r.y << " " << r.x; }
 };
+
+template <int sz>
+struct IndexSet {
+    vector<int> vec;
+    IndexSet() {
+        for (int i = 0; i < sz; i++) _pos[i] = -1;
+    }
+    void insert(int v) {
+        assert(0 <= v && v < sz);
+        if (contains(v)) return;
+        _pos[v] = vec.size();
+        vec.push_back(v);
+    }
+    void remove(int v) {
+        assert(contains(v));
+        int p = _pos[v], b = vec.back();
+        vec[p] = b;
+        vec.pop_back();
+        _pos[b] = p;
+        _pos[v] = -1;
+    }
+    int random_pop() {
+        assert(!vec.empty());
+        int v = myrand.choice(vec);
+        remove(v);
+        return v;
+    }
+    bool contains(int v) const { return _pos[v] != -1; }
+    bool empty() const { return vec.empty(); }
+    size_t size() const { return vec.size(); }
+    friend ostream& operator<<(ostream& os, const IndexSet& is) {
+        vector<int> v = is.vec;
+        sort(v.begin(), v.end());
+        for (auto& e : v) os << e << " ";
+        return os << endl;
+    }
+
+   private:
+    int _pos[sz];
+};
+using IdxSet = IndexSet<100>;
+
 // clang-format on
 
 #ifdef VIS
-#include "matplotlib-cpp/matplotlibcpp.h"
+#include "matplotlibcpp.h"
 namespace plt = matplotlibcpp;
 #define vis(...) _vis(__LINE__, #__VA_ARGS__, __VA_ARGS__)
 void _vis(int lineNum, string name, vector<int> As) {
-    cerr << "\033[1;32m" << lineNum << "\033[0m: now plotting '" << name
-         << "'..." << endl;
+    cerr << "\033[1;32m" << lineNum << "\033[0m: now plotting '" << name << "'..."
+         << endl;
     plt::title(name);
     plt::plot(As);
     plt::show();
@@ -128,13 +175,16 @@ void _vis(int lineNum, string name, vector<int> As) {
 
 void getInput() {}
 
-void solve() {}
+void solve() {
+    vi As(100);
+    iota(ALL(As), 0);
 
-int main(int argc, char* argv[]) {
+    vis(As);
+}
+
+int main() {
     cin.tie(0);
     ios::sync_with_stdio(false);
-
-    for (int i = 1; i < argc; i++) debug(string(argv[i]));
 
     timer.start();
 
