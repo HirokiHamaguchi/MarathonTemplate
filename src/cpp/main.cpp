@@ -1,8 +1,8 @@
 #ifndef hari64
-#include <bits/stdc++.h>
 #pragma GCC target("avx2")
 #pragma GCC optimize("O3")
 #pragma GCC optimize("unroll-loops")
+#include <bits/stdc++.h>
 #define debug(...)
 #else
 #include "viewer.hpp"
