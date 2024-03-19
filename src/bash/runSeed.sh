@@ -1,11 +1,11 @@
 set -e
 
 filename=./src/cpp/main
-input=in
-output=out/out.txt
+indir=tools/in
+outdir=out
 
 echo "now compiling..."
-/usr/bin/g++-10 -fdiagnostics-color=always $filename.cpp -o $filename -std=c++17 -Wall -Wextra -D_GLIBCXX_DEBUG -Dhari64
+/usr/bin/g++-10 -fdiagnostics-color=always $filename.cpp -o $filename -std=c++17 -Wall -Wextra -O3 -I/usr/include/eigen3
 
 YELLOW="\033[33m"
 RESET="\033[0m"
@@ -14,4 +14,4 @@ seed=$(( seed ? seed : 0 ))
 seed=`printf "%04d\n" "${seed}"`
 
 echo "now running..."
-tools/target/release/tester $filename < $indir/$seed.txt > $output
+./tools/target/release/tester $filename < $indir/$seed.txt > $outdir/$seed.txt

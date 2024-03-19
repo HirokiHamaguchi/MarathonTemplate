@@ -8,15 +8,5 @@ else
 fi
 
 export DISPLAY=:0.0
-conda activate Marathon
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias ..2='cd ../..'
-alias ..3='cd ../../..'
-alias B='bash'
-alias P='python3'
+alias ojt='bash src/bash/runSeed.sh'
 cat src/bash/init.sh
