@@ -11,7 +11,7 @@ cppFile=./data/$now.cpp
 cp $filename.cpp $cppFile
 
 echo "now compiling..."
-/usr/bin/g++-10 -fdiagnostics-color=always $filename.cpp -o $filename -std=c++17 -Wall -Wextra -O3 -Dhari64
+/usr/bin/g++-10 -fdiagnostics-color=always $filename.cpp -o $filename -std=c++17 -Wall -Wextra -DLOCAL -O3
 
 echo "now running..."
 for ((i=0; i < $num; i++)); do

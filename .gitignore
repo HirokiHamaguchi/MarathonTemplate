@@ -3,10 +3,5 @@
 !*/
 !*.*
 
-src/cpp/viewer.hpp.gch
-
-# .mypy_cache/*
-# .vscode/*
-# tools/*
-# out/*
-# in/*
+tools/*
+out/*.txt

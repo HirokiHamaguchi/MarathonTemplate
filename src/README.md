@@ -6,8 +6,6 @@
 source src/bash/init.sh
 ```
 
-自動でどうするかは不明(direnv?)
-
 ## cpp
 
 ### matplotlib-cpp
