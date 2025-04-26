@@ -65,32 +65,13 @@ struct Rand{// https://docs.python.org/ja/3/library/random.html
   private: Xor128 gen; std::mt19937 mt;
 }myrand;
 
-namespace esc {
-const vi colors{196,208,226,46,77,14,12,13,5,136,195,245};
-template <class T>void color(int c,T s,bool doEndl=true){cerr<<"\e[38;5;"<<colors[c]<<"m"<<s<<"\e[0m";if(doEndl)cerr<<endl;}
-template <class T>void RED       (T s,bool doEndl=true){color( 0,s,doEndl);}
-template <class T>void ORANGE    (T s,bool doEndl=true){color( 1,s,doEndl);}
-template <class T>void YELLOW    (T s,bool doEndl=true){color( 2,s,doEndl);}
-template <class T>void LIGHTGREEN(T s,bool doEndl=true){color( 3,s,doEndl);}
-template <class T>void GREEN     (T s,bool doEndl=true){color( 4,s,doEndl);}
-template <class T>void AQUA      (T s,bool doEndl=true){color( 5,s,doEndl);}
-template <class T>void BLUE      (T s,bool doEndl=true){color( 6,s,doEndl);}
-template <class T>void PINK      (T s,bool doEndl=true){color( 7,s,doEndl);}
-template <class T>void PURPLE    (T s,bool doEndl=true){color( 8,s,doEndl);}
-template <class T>void BROWN     (T s,bool doEndl=true){color( 9,s,doEndl);}
-template <class T>void WHITE     (T s,bool doEndl=true){color(10,s,doEndl);}
-template <class T>void GRAY      (T s,bool doEndl=true){color(11,s,doEndl);}
-string withSep(int n,char sep=','){string ret="",s=to_string(n);reverse(ALL(s));for(int i=0,len=s.length();i<=len;)
-{ret+=s.substr(i,3);if((i+=3)>=len)break;ret+=sep;}reverse(ALL(ret));return ret;}
-string withFill(int n,int num=3,char space=' '){string s=to_string(n);return string(max(0,num-int(s.size())),space)+s;}}
-
 template<int sz>
 struct IndexSet{
   vector<int>vec;
   IndexSet(){for(int i=0;i<sz;i++)_pos[i]=-1;}
   void insert(int v){assert(0<=v&&v<sz);if(contains(v))return;_pos[v]=vec.size();vec.push_back(v);}
   void remove(int v){assert(contains(v));int p=_pos[v],b=vec.back();vec[p]=b;vec.pop_back();_pos[b]=p;_pos[v]=-1;}
-  int random_pop(){assert(!vec.empty());int v=myrand.choice(vec);remove(v);return v;}
+  int random_pop(){assert(!vec.empty());int v=vec[myrand.randRange(vec.size())];remove(v);return v;}
   bool contains(int v)const{return _pos[v]!=-1;}
   bool empty()const{return vec.empty();}
   size_t size()const{return vec.size();}
@@ -101,22 +82,6 @@ struct IndexSet{
 using IdxSet = IndexSet<100>;
 // clang-format on
 
-#ifdef VIS
-#include "matplotlibcpp.h"
-namespace plt = matplotlibcpp;
-#define vis(...) _vis(__LINE__, #__VA_ARGS__, __VA_ARGS__)
-void _vis(int lineNum, string name, vector<int> As) {
-  cerr << "\033[1;32m" << lineNum << "\033[0m: now plotting '" << name << "'..."
-       << endl;
-  plt::title(name);
-  plt::plot(As);
-  plt::show();
-  // plt::save("img/imshow.png");
-}
-#else
-#define vis(...)
-#endif
-
 // constexpr int N = 10;
 // using YX = _YX<N>;
 // const YX DYX[4] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
@@ -124,11 +89,7 @@ void _vis(int lineNum, string name, vector<int> As) {
 
 void getInput() {}
 
-void solve() {
-  vi As(100);
-  iota(ALL(As), 0);
-  vis(As);
-}
+void solve() {}
 
 int main() {
   cin.tie(0);

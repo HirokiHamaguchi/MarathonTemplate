@@ -3,7 +3,7 @@
         {
             "type": "cppbuild",
             "label": "g++ build active file",
-            "command": "/usr/bin/g++-10",
+            "command": "/usr/bin/g++-13",
             "args": [
                 "-g",
                 "${fileBasename}",
@@ -16,10 +16,9 @@
                 "-Wfatal-errors",
                 "-fdiagnostics-color=always",
                 "-D_GLIBCXX_DEBUG",
-                "-DVIS",
-                "-I/usr/include/eigen3",
-                "-I/usr/include/python3.8",
-                "-lpython3.8",
+                // "-I/usr/include/eigen3",
+                // "-I/usr/include/python3.8",
+                // "-lpython3.8",
                 // "-O2",
                 // "-O3",
             ],
