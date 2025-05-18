@@ -15,12 +15,14 @@
                 "-Wextra",
                 "-Wfatal-errors",
                 "-fdiagnostics-color=always",
-                "-D_GLIBCXX_DEBUG",
+                // "-D_GLIBCXX_DEBUG",
+                "-march=native",
+                "-DDBG",
                 // "-I/usr/include/eigen3",
                 // "-I/usr/include/python3.8",
                 // "-lpython3.8",
                 // "-O2",
-                // "-O3",
+                "-O3",
             ],
             "options": {
                 "cwd": "${fileDirname}"

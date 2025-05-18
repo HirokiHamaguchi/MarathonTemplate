@@ -1,14 +1,15 @@
-#ifndef LOCAL
+#ifdef ONLINE_JUDGE
 #pragma GCC target("avx2")
 #pragma GCC optimize("O3")
 #pragma GCC optimize("unroll-loops")
 #define NDEBUG
-#define dbg(...)
 #endif
 
 #ifdef DBG
 #define DBG_MACRO_NO_WARNING
 #include "dbg.h"
+#else
+#define dbg(...) 0
 #endif
 
 #include <bits/stdc++.h>
@@ -99,6 +100,8 @@ int main() {
   getInput();
   solve();
   timer.stop();
+
+  dbg(timer.sec());
 
   return 0;
 }
