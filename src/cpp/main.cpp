@@ -9,7 +9,7 @@
 #define DBG_MACRO_NO_WARNING
 #include "dbg.h"
 #else
-#define dbg(...) 0
+#define dbg(...) ((void)0)
 #endif
 
 #include <bits/stdc++.h>

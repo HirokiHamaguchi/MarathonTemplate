@@ -65,7 +65,7 @@ if __name__ == "__main__":
     print("setup start")
 
     os.system(
-        f"/usr/bin/g++-10 -fdiagnostics-color=always ./src/cpp/{answer_file_name}.cpp -o ./src/cpp/{answer_file_name} -std=c++17 -Wall -Wextra -O3")
+        f"/usr/bin/g++-13 -fdiagnostics-color=always ./src/cpp/{answer_file_name}.cpp -o ./src/cpp/{answer_file_name} -std=c++17 -Wall -Wextra -O3")
 
     study = optuna.create_study(
         direction="minimize",
